@@ -406,17 +406,30 @@ function renderTemplate(container, template, where = `afterend`) {
   container.insertAdjacentHTML(where, template);
 }
 
-renderTemplate(controlTitle, menuTemplate);
-renderTemplate(control, filterTemplate);
-
-const filter = document.querySelector(`.filter`);
-renderTemplate(filter, boardTemplate);
-
-const board = document.querySelector(`.board`);
-const boardTasks = board.querySelector(`.board__tasks`);
-const CARD_RENDER_COUNT = `3`;
-renderTemplate(boardTasks, editCardTemplate, `afterbegin`);
-for (let i = 0; i < CARD_RENDER_COUNT; i++) {
-  renderTemplate(boardTasks, defaultCardTemplate, `beforeend`);
+function renderMenu() {
+  renderTemplate(controlTitle, menuTemplate);
+  renderTemplate(control, filterTemplate);
 }
-renderTemplate(boardTasks, loadButtonTemplate);
+
+function renderFilter() {
+  const filter = document.querySelector(`.filter`);
+  renderTemplate(filter, boardTemplate);
+}
+
+function renderContent() {
+  const CARD_RENDER_COUNT = 3;
+  const board = document.querySelector(`.board`);
+  const boardTasks = board.querySelector(`.board__tasks`);
+
+  renderTemplate(boardTasks, editCardTemplate, `afterbegin`);
+
+  for (let i = 0; i < CARD_RENDER_COUNT; i++) {
+    renderTemplate(boardTasks, defaultCardTemplate, `beforeend`);
+  }
+
+  renderTemplate(boardTasks, loadButtonTemplate);
+}
+
+renderMenu();
+renderFilter();
+renderContent();
