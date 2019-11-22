@@ -402,8 +402,14 @@ const editCardTemplate = `
 const control = document.querySelector(`.control`);
 const controlTitle = control.querySelector(`.control__title`);
 
-function renderTemplate(container, template, where = `afterend`) {
-  container.insertAdjacentHTML(where, template);
+function renderTemplate(container, template, where = `afterend`, timesToRender = 1) {
+  let fragment = ``;
+  const RENDER_COUNT = Array(timesToRender).fill(``);
+  RENDER_COUNT.forEach(
+      ()=> {
+        fragment += template;
+      });
+  container.insertAdjacentHTML(where, fragment);
 }
 
 function renderMenu() {
@@ -417,15 +423,12 @@ function renderFilter() {
 }
 
 function renderContent() {
-  const CARD_RENDER_COUNT = 3;
   const board = document.querySelector(`.board`);
   const boardTasks = board.querySelector(`.board__tasks`);
 
   renderTemplate(boardTasks, editCardTemplate, `afterbegin`);
 
-  for (let i = 0; i < CARD_RENDER_COUNT; i++) {
-    renderTemplate(boardTasks, defaultCardTemplate, `beforeend`);
-  }
+  renderTemplate(boardTasks, defaultCardTemplate, `beforeend`, 3);
 
   renderTemplate(boardTasks, loadButtonTemplate);
 }
