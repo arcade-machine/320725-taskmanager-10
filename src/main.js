@@ -1,9 +1,9 @@
 import { menuTemplate as menuTemplate } from "./components/menu/menuTemplate";
 import { filterTemplate as filterTemplate } from "./components/menu/filterTemplate";
 import { boardTemplate as boardTemplate } from "./components/content/boardTemplate";
-import { loadButtonTemplate as loadButtonTemplate } from "./components/content/loadButtonTemplate";
-import { defaultCardTemplate as defaultCardTemplate } from "./components/menu/card-templates/defaultCardTemplate";
-import { editCardTemplate as editCardTemplate } from "./components/menu/card-templates/editCardTemplate";
+import { loadMoreButtonTemplate as loadButtonTemplate } from "./components/content/loadMoreButtonTemplate";
+import { cardTemplate as defaultCardTemplate } from "./components/menu/card-templates/cardTemplate";
+import { editedCardTemplate as editCardTemplate } from "./components/menu/card-templates/editedCardTemplate";
 
 import { renderTemplate as renderTemplate } from "./functions/renderTemplate";
 

@@ -1,4 +1,4 @@
-export const defaultCardTemplate = `
+export const cardTemplate = `
 <article class="card card--black">
   <div class="card__form">
     <div class="card__inner">
