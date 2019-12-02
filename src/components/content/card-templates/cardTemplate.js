@@ -50,4 +50,4 @@ export const cardTemplate = (color, title, dueDate = ``) => {
     </div>
   </article>
 `;
-}
+};

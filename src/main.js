@@ -1,10 +1,11 @@
 import { menuTemplate } from "./components/menu/menuTemplate";
-import { filterTemplate } from "./components/menu/filterTemplate";
+import { filterTemplate } from "./components/menu/filter/filterTemplate";
+import { filterItemTemplate } from "./components/menu/filter/filterItemTemplate";
 import { boardTemplate } from "./components/content/boardTemplate";
 import { loadMoreButtonTemplate } from "./components/content/loadMoreButtonTemplate";
-import { cardTemplate } from "./components/menu/card-templates/cardTemplate";
-import { editedCardTemplate } from "./components/menu/card-templates/editedCardTemplate";
-import { tagTemplate } from "./components/menu/card-templates/hashtagtemplate";
+import { cardTemplate } from "./components/content/card-templates/cardTemplate";
+import { editedCardTemplate } from "./components/content/card-templates/editedCardTemplate";
+import { tagTemplate } from "./components/content/card-templates/blocks/hashtagtemplate";
 
 import { renderTemplate } from "./functions/renderTemplate";
 import { getRandomNumber } from "./functions/commonFunctions";
@@ -12,7 +13,7 @@ import { getRandomDate } from "./functions/commonFunctions";
 import { applyDaysToDate } from "./functions/commonFunctions";
 import { getPrettyDate } from "./functions/commonFunctions";
 
-let cardData = {
+const cardData = {
   "description": [
     `Извучить теорию`,
     `Сделать домашку`,
@@ -49,28 +50,49 @@ let cardData = {
   "isArchive": false
 };
 
+const filterData = {
+  "title": [
+    `All`,
+    `Overdue`,
+    `Today`,
+    `Favorites`,
+    `Repeating`,
+    `Tags`,
+    `Archive`
+  ]
+};
+
 function renderMenu() {
   const control = document.querySelector(`.control`);
   const controlTitle = control.querySelector(`.control__title`);
 
   renderTemplate(controlTitle, menuTemplate);
-  renderTemplate(control, filterTemplate);
+  renderTemplate(control, filterTemplate());
 }
 
 function renderFilter() {
   const filter = document.querySelector(`.filter`);
 
+  filterData.title.forEach((title) =>{
+    renderTemplate(filter, filterItemTemplate(title), `beforeend`);
+  });
   renderTemplate(filter, boardTemplate);
 }
 
 function renderContent() {
   const board = document.querySelector(`.board`);
   const boardTasks = board.querySelector(`.board__tasks`);
-  const CARD_RENDER_COUNT = 3;
+  const CARD_RENDER_COUNT = 7;
 
-  renderTemplate(boardTasks, editedCardTemplate, `afterbegin`);
+  renderTemplate(boardTasks, editedCardTemplate(
+      cardData.color[getRandomNumber(0, cardData.color.length - 1)],
+      cardData.description[getRandomNumber(0, cardData.description.length - 1)]
+  ), `afterbegin`);
   for (let i = 0; i < CARD_RENDER_COUNT; i++) {
-    const DAY_AND_MONTH = getPrettyDate(getRandomDate(applyDaysToDate(cardData.dueDate, 7), applyDaysToDate(cardData.dueDate, -7)));
+    const DAY_AND_MONTH = getPrettyDate(
+        getRandomDate(
+            applyDaysToDate(cardData.dueDate, 7), applyDaysToDate(cardData.dueDate, -7)
+        ));
     renderTemplate(boardTasks, cardTemplate(
         cardData.color[getRandomNumber(0, cardData.color.length - 1)],
         cardData.description[getRandomNumber(0, cardData.description.length - 1)],
