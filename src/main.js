@@ -1,9 +1,9 @@
-import { menuTemplate as menuTemplate } from "./components/menu/menuTemplate";
-import { filterTemplate as filterTemplate } from "./components/menu/filterTemplate";
-import { boardTemplate as boardTemplate } from "./components/content/boardTemplate";
-import { loadMoreButtonTemplate as loadButtonTemplate } from "./components/content/loadMoreButtonTemplate";
-import { cardTemplate as defaultCardTemplate } from "./components/menu/card-templates/cardTemplate";
-import { editedCardTemplate as editCardTemplate } from "./components/menu/card-templates/editedCardTemplate";
+import { menuTemplate } from "./components/menu/menuTemplate";
+import { filterTemplate } from "./components/menu/filterTemplate";
+import { boardTemplate } from "./components/content/boardTemplate";
+import { loadMoreButtonTemplate } from "./components/content/loadMoreButtonTemplate";
+import { cardTemplate } from "./components/menu/card-templates/cardTemplate";
+import { editedCardTemplate } from "./components/menu/card-templates/editedCardTemplate";
 
 import { renderTemplate as renderTemplate } from "./functions/renderTemplate";
 
@@ -25,9 +25,9 @@ function renderContent() {
   const board = document.querySelector(`.board`);
   const boardTasks = board.querySelector(`.board__tasks`);
 
-  renderTemplate(boardTasks, editCardTemplate, `afterbegin`);
-  renderTemplate(boardTasks, defaultCardTemplate, `beforeend`, 3);
-  renderTemplate(boardTasks, loadButtonTemplate);
+  renderTemplate(boardTasks, editedCardTemplate, `afterbegin`);
+  renderTemplate(boardTasks, cardTemplate, `beforeend`, 3);
+  renderTemplate(boardTasks, loadMoreButtonTemplate);
 }
 
 renderMenu();
